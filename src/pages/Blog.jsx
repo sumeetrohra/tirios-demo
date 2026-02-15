@@ -1,99 +1,55 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FiSearch, FiClock, FiUser } from 'react-icons/fi';
+import { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FiSearch, FiClock, FiUser } from "react-icons/fi";
+import API from "../api/axios";
 
 function Blog() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [categories, setCategories] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const categories = [
-    { id: 'all', name: 'All Posts' },
-    { id: 'crypto', name: 'Cryptocurrency' },
-    { id: 'investment', name: 'Investment' },
-    { id: 'property', name: 'Property' },
-    { id: 'technology', name: 'Technology' },
-    { id: 'market', name: 'Market Analysis' }
-  ];
+  // Fetch categories once on mount
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await API.get("/blog/categories");
+        setCategories(res.data?.categories || []);
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+      }
+    };
+    fetchCategories();
+  }, []);
 
-  const posts = [
-    {
-      id: 1,
-      title: 'The Future of Real Estate: Cryptocurrency Payments and Blockchain Technology',
-      slug: 'future-real-estate-crypto-payments',
-      excerpt: 'Explore how cryptocurrency and blockchain are revolutionizing property transactions and investment opportunities.',
-      image: 'https://images.unsplash.com/photo-1516245834210-c4c142787335?w=800&q=80',
-      category: 'crypto',
-      author: 'Sarah Johnson',
-      date: '2024-03-15',
-      readTime: '5 min read'
-    },
-    {
-      id: 2,
-      title: 'Understanding Tokenized Real Estate Investment',
-      slug: 'understanding-tokenized-real-estate',
-      excerpt: "A comprehensive guide to property tokenization and how it's making real estate investment more accessible.",
-      image: 'https://images.unsplash.com/photo-1460472178825-e5240623afd5?w=800&q=80',
-      category: 'investment',
-      author: 'Michael Chen',
-      date: '2024-03-12',
-      readTime: '7 min read'
-    },
-    {
-      id: 3,
-      title: 'Smart Contracts in Real Estate Transactions',
-      slug: 'smart-contracts-real-estate',
-      excerpt: 'How smart contracts are streamlining property transactions and reducing costs.',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
-      category: 'technology',
-      author: 'David Rodriguez',
-      date: '2024-03-10',
-      readTime: '6 min read'
-    },
-    {
-      id: 4,
-      title: '2024 Real Estate Market Analysis: Crypto Impact',
-      slug: '2024-market-analysis-crypto',
-      excerpt: 'Analysis of how cryptocurrency adoption is affecting real estate market dynamics.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-      category: 'market',
-      author: 'Emma Wilson',
-      date: '2024-03-08',
-      readTime: '8 min read'
-    },
-    {
-      id: 5,
-      title: 'Property Investment Strategies with Cryptocurrency',
-      slug: 'property-investment-strategies-crypto',
-      excerpt: 'Learn effective strategies for investing in real estate using cryptocurrency.',
-      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80',
-      category: 'investment',
-      author: 'Sarah Johnson',
-      date: '2024-03-05',
-      readTime: '6 min read'
-    },
-    {
-      id: 6,
-      title: 'Regulatory Landscape: Crypto in Real Estate',
-      slug: 'regulatory-landscape-crypto-real-estate',
-      excerpt: 'Understanding the current regulatory environment for cryptocurrency-based property transactions.',
-      image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80',
-      category: 'crypto',
-      author: 'Michael Chen',
-      date: '2024-03-02',
-      readTime: '7 min read'
+  // Fetch posts when filters change
+  const fetchPosts = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const params = new URLSearchParams();
+      if (searchTerm) params.append("search", searchTerm);
+      if (selectedCategory !== "all")
+        params.append("category", selectedCategory);
+      const res = await API.get(`/blog/posts?${params.toString()}`);
+      setPosts(res.data?.posts || []);
+    } catch (err) {
+      console.error("Error fetching posts:", err);
+      setError("Failed to load blog posts. Please try again later.");
+    } finally {
+      setLoading(false);
     }
-  ];
+  }, [searchTerm, selectedCategory]);
 
-  const filteredPosts = posts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   return (
-    <div className="min-h-screen bg-secondary-50 py-16">
+    <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 py-16">
       <div className="container">
         {/* Header */}
         <motion.div
@@ -101,19 +57,22 @@ function Blog() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <h1 className="text-4xl font-bold mb-4">Real Estate & Crypto Insights</h1>
-          <p className="text-secondary-600">
-            Stay updated with the latest trends in real estate investment, cryptocurrency, and blockchain technology.
+          <h1 className="text-4xl font-bold mb-4">
+            Real Estate & Crypto Insights
+          </h1>
+          <p className="text-secondary-600 dark:text-secondary-300">
+            Stay updated with the latest trends in real estate investment,
+            cryptocurrency, and blockchain technology.
           </p>
         </motion.div>
 
         {/* Search and Filter */}
         <div className="max-w-4xl mx-auto mb-12">
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
                 <div className="relative">
-                  <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400" />
+                  <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500" />
                   <input
                     type="text"
                     placeholder="Search articles..."
@@ -129,7 +88,7 @@ function Blog() {
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                 >
-                  {categories.map(category => (
+                  {categories.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name}
                     </option>
@@ -140,46 +99,65 @@ function Blog() {
           </div>
         </div>
 
+        {/* Loading / Error States */}
+        {loading && (
+          <div className="text-center py-12">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary-600 border-r-transparent" />
+            <p className="mt-4 text-secondary-600 dark:text-secondary-300">
+              Loading posts...
+            </p>
+          </div>
+        )}
+        {error && <div className="text-center py-12 text-red-600">{error}</div>}
+        {!loading && !error && posts.length === 0 && (
+          <div className="text-center py-12 text-secondary-600 dark:text-secondary-300">
+            No articles found matching your search.
+          </div>
+        )}
+
         {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
-            >
-              <Link to={`/blog/${post.slug}`}>
-                <div className="relative h-48">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-primary-600">
-                    {categories.find(c => c.id === post.category)?.name}
+        {!loading && !error && posts.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map((post, index) => (
+              <motion.article
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white dark:bg-secondary-800 rounded-lg shadow-md overflow-hidden"
+              >
+                <Link to={`/blog/${post.slug}`}>
+                  <div className="relative h-48">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 right-4 bg-white dark:bg-secondary-800 px-3 py-1 rounded-full text-sm font-medium text-primary-600">
+                      {categories.find((c) => c.id === post.category)?.name ||
+                        post.category}
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <h2 className="text-xl font-semibold mb-3 hover:text-primary-600 transition-colors">
-                    {post.title}
-                  </h2>
-                  <p className="text-secondary-600 mb-4">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center text-sm text-secondary-500">
-                    <FiUser className="mr-2" />
-                    <span className="mr-4">{post.author}</span>
-                    <FiClock className="mr-2" />
-                    <span>{post.readTime}</span>
+                  <div className="p-6">
+                    <h2 className="text-xl font-semibold mb-3 hover:text-primary-600 transition-colors">
+                      {post.title}
+                    </h2>
+                    <p className="text-secondary-600 dark:text-secondary-300 mb-4">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center text-sm text-secondary-500 dark:text-secondary-400">
+                      <FiUser className="mr-2" />
+                      <span className="mr-4">{post.author}</span>
+                      <FiClock className="mr-2" />
+                      <span>{post.readTime}</span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </motion.article>
-          ))}
-        </div>
+                </Link>
+              </motion.article>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

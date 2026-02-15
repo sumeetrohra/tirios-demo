@@ -1,55 +1,69 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FiClock, FiUser, FiCalendar, FiShare2, FiArrowLeft, FiTag } from 'react-icons/fi';
-import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  FiClock,
+  FiUser,
+  FiCalendar,
+  FiShare2,
+  FiArrowLeft,
+  FiTag,
+} from "react-icons/fi";
+import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import API from "../api/axios";
 
 function BlogPost() {
+  const { slug } = useParams();
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const post = {
-    title: 'The Future of Real Estate: Cryptocurrency Payments and Blockchain Technology',
-    content: `
-      <p class="mb-4">The real estate industry is undergoing a revolutionary transformation with the integration of cryptocurrency payments and blockchain technology. This shift is not just about adding another payment method – it's about fundamentally changing how property transactions are conducted, recorded, and verified.</p>
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        setLoading(true);
+        const res = await API.get(`/blog/posts/${slug}`);
+        setPost(res.data?.post || null);
+      } catch (err) {
+        console.error("Error fetching blog post:", err);
+        setError("Failed to load blog post. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPost();
+  }, [slug]);
 
-      <h2 class="text-2xl font-semibold mt-8 mb-4">The Rise of Crypto in Real Estate</h2>
-      <p class="mb-4">Cryptocurrency is increasingly being accepted in real estate transactions, offering several advantages:</p>
-      <ul class="list-disc pl-6 mb-4">
-        <li class="mb-2">Faster transaction processing</li>
-        <li class="mb-2">Lower transaction fees</li>
-        <li class="mb-2">Enhanced security through blockchain technology</li>
-        <li class="mb-2">Access to global investment opportunities</li>
-      </ul>
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary-600 border-r-transparent" />
+          <p className="mt-4 text-secondary-600 dark:text-secondary-300">
+            Loading article...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
-      <h2 class="text-2xl font-semibold mt-8 mb-4">Blockchain's Impact on Property Transactions</h2>
-      <p class="mb-4">Blockchain technology is revolutionizing property transactions in several ways:</p>
-      <ol class="list-decimal pl-6 mb-4">
-        <li class="mb-2">Smart Contracts: Automating and securing transaction processes</li>
-        <li class="mb-2">Property Records: Creating immutable records of ownership</li>
-        <li class="mb-2">Tokenization: Enabling fractional property ownership</li>
-        <li class="mb-2">Transparency: Providing clear transaction histories</li>
-      </ol>
-
-      <h2 class="text-2xl font-semibold mt-8 mb-4">The Future Outlook</h2>
-      <p class="mb-4">As we look to the future, several trends are emerging:</p>
-      <ul class="list-disc pl-6 mb-4">
-        <li class="mb-2">Increased adoption of cryptocurrency payments in real estate</li>
-        <li class="mb-2">More platforms offering tokenized property investments</li>
-        <li class="mb-2">Integration of smart contracts in property transactions</li>
-        <li class="mb-2">Enhanced security measures for digital real estate transactions</li>
-      </ul>
-
-      <h2 class="text-2xl font-semibold mt-8 mb-4">Conclusion</h2>
-      <p class="mb-4">The integration of cryptocurrency and blockchain in real estate is not just a trend – it's the future of property transactions. As these technologies continue to evolve, we can expect to see more innovative solutions that make real estate investment more accessible, secure, and efficient.</p>
-    `,
-    image: 'https://images.unsplash.com/photo-1516245834210-c4c142787335?w=1200&q=80',
-    author: 'Sarah Johnson',
-    date: '2024-03-15',
-    readTime: '5 min read',
-    category: 'Cryptocurrency',
-    tags: ['Blockchain', 'Real Estate', 'Cryptocurrency', 'Investment']
-  };
+  if (error || !post) {
+    return (
+      <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 text-lg">
+            {error || "Blog post not found"}
+          </p>
+          <Link to="/blog" className="btn mt-4 inline-block">
+            Back to Blog
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-secondary-50">
+    <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900">
       {/* Hero Section */}
       <div className="relative h-[400px]">
         <img
@@ -65,12 +79,15 @@ function BlogPost() {
               animate={{ opacity: 1, y: 0 }}
               className="max-w-3xl text-white"
             >
-              <Link to="/blog" className="inline-flex items-center text-white mb-6 hover:text-primary-300">
+              <Link
+                to="/blog"
+                className="inline-flex items-center text-white mb-6 hover:text-primary-300"
+              >
                 <FiArrowLeft className="mr-2" />
                 Back to Blog
               </Link>
               <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-              <div className="flex items-center text-secondary-200 space-x-6">
+              <div className="flex items-center text-secondary-200 dark:text-secondary-300 space-x-6">
                 <div className="flex items-center">
                   <FiUser className="mr-2" />
                   {post.author}
@@ -99,10 +116,10 @@ function BlogPost() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <div 
+            <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-8">
+              <div
                 className="prose prose-lg max-w-none"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                dangerouslySetInnerHTML={{ __html: post.content || "" }}
               />
             </div>
           </motion.div>
@@ -115,41 +132,43 @@ function BlogPost() {
           >
             <div className="space-y-6">
               {/* Share */}
-              <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6">
                 <h3 className="text-lg font-semibold mb-4 flex items-center">
                   <FiShare2 className="mr-2" />
                   Share this article
                 </h3>
                 <div className="flex space-x-4">
-                  <button className="p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200">
+                  <button className="p-2 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 hover:bg-blue-200 dark:hover:bg-blue-800">
                     <FaFacebook size={20} />
                   </button>
-                  <button className="p-2 rounded-full bg-sky-100 text-sky-500 hover:bg-sky-200">
+                  <button className="p-2 rounded-full bg-sky-100 dark:bg-sky-900 text-sky-500 hover:bg-sky-200 dark:hover:bg-sky-800">
                     <FaTwitter size={20} />
                   </button>
-                  <button className="p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200">
+                  <button className="p-2 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 hover:bg-blue-200 dark:hover:bg-blue-800">
                     <FaLinkedin size={20} />
                   </button>
                 </div>
               </div>
 
               {/* Tags */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center">
-                  <FiTag className="mr-2" />
-                  Tags
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-secondary-100 text-secondary-600 rounded-full text-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+              {post.tags && post.tags.length > 0 && (
+                <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center">
+                    <FiTag className="mr-2" />
+                    Tags
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-secondary-100 dark:bg-secondary-700 text-secondary-600 dark:text-secondary-300 rounded-full text-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </motion.div>
         </div>

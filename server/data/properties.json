@@ -1,0 +1,400 @@
+[
+  {
+    "id": 1,
+    "title": "Modern Villa with Pool",
+    "price": {
+      "usd": 850000,
+      "eth": 425
+    },
+    "location": "Beverly Hills, CA",
+    "image": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+    "type": "villa",
+    "roi": "7.2%",
+    "metrics": {
+      "totalInvestors": 142,
+      "funded": "89%",
+      "minInvestment": "$10",
+      "monthlyIncome": "$520",
+      "appreciation": "4.5%",
+      "rentalYield": "5.8%",
+      "totalReturn": "10.3%"
+    },
+    "status": "Active Investment",
+    "description": "This stunning modern villa offers luxurious living spaces with high-end finishes throughout. The property has been tokenized for fractional ownership, allowing investors to participate in this premium real estate opportunity with as little as $10.",
+    "features": [
+      "Swimming Pool",
+      "Smart Home System",
+      "Gourmet Kitchen",
+      "Home Theater",
+      "Wine Cellar",
+      "Outdoor Kitchen",
+      "Fire Pit",
+      "Three-Car Garage"
+    ],
+    "tokenDetails": {
+      "totalTokens": 85000,
+      "availableTokens": 9350,
+      "tokenPrice": "$10",
+      "tokenSymbol": "VILLA425",
+      "contractAddress": "0x1234...5678",
+      "blockchain": "Ethereum"
+    },
+    "financials": {
+      "grossRent": "$8,500/month",
+      "netRent": "$7,225/month",
+      "expenses": {
+        "management": "8%",
+        "maintenance": "5%",
+        "insurance": "2%",
+        "property_tax": "1.2%"
+      },
+      "projectedAppreciation": "4.5% annually"
+    },
+    "yearBuilt": 2020,
+    "parkingSpaces": 3,
+    "lotSize": "0.5 acres",
+    "images": [
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80"
+    ],
+    "model3d": "/models/house1.glb",
+    "agent": {
+      "name": "John Doe",
+      "phone": "+1 (555) 123-4567",
+      "email": "john@realestate.com",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Luxury Penthouse",
+    "price": {
+      "usd": 1200000,
+      "eth": 600
+    },
+    "location": "Manhattan, NY",
+    "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
+    "type": "apartment",
+    "roi": "6.8%",
+    "metrics": {
+      "totalInvestors": 203,
+      "funded": "95%",
+      "minInvestment": "$10",
+      "monthlyIncome": "$680",
+      "appreciation": "5.2%",
+      "rentalYield": "5.4%",
+      "totalReturn": "9.8%"
+    },
+    "status": "Almost Funded",
+    "description": "Situated in the heart of Manhattan, this luxury penthouse offers breathtaking city views and world-class amenities. Tokenized for fractional ownership, this is a rare opportunity to invest in one of New York's most prestigious addresses.",
+    "features": [
+      "Doorman Building",
+      "Fitness Center",
+      "Rooftop Terrace",
+      "Concierge Service",
+      "Private Elevator",
+      "Floor-to-Ceiling Windows",
+      "Chef's Kitchen",
+      "Spa Bathroom"
+    ],
+    "tokenDetails": {
+      "totalTokens": 120000,
+      "availableTokens": 6000,
+      "tokenPrice": "$10",
+      "tokenSymbol": "PENT600",
+      "contractAddress": "0x5678...9abc",
+      "blockchain": "Ethereum"
+    },
+    "financials": {
+      "grossRent": "$12,000/month",
+      "netRent": "$10,200/month",
+      "expenses": {
+        "management": "8%",
+        "maintenance": "4%",
+        "insurance": "2.5%",
+        "property_tax": "1.5%"
+      },
+      "projectedAppreciation": "5.2% annually"
+    },
+    "yearBuilt": 2019,
+    "parkingSpaces": 2,
+    "lotSize": "3,200 sqft",
+    "images": [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80"
+    ],
+    "model3d": "/models/house1.glb",
+    "agent": {
+      "name": "Jane Smith",
+      "phone": "+1 (555) 987-6543",
+      "email": "jane@realestate.com",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Waterfront Estate",
+    "price": {
+      "usd": 2100000,
+      "eth": 1050
+    },
+    "location": "Miami Beach, FL",
+    "image": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+    "type": "house",
+    "roi": "7.5%",
+    "metrics": {
+      "totalInvestors": 89,
+      "funded": "45%",
+      "minInvestment": "$10",
+      "monthlyIncome": "$1200",
+      "appreciation": "6.1%",
+      "rentalYield": "6.2%",
+      "totalReturn": "11.5%"
+    },
+    "status": "New Listing",
+    "description": "This magnificent waterfront estate in Miami Beach offers direct ocean access and stunning panoramic views. With luxury finishes and expansive living spaces, this tokenized property represents an exceptional investment opportunity in one of Florida's most desirable locations.",
+    "features": [
+      "Waterfront Access",
+      "Private Dock",
+      "Wine Cellar",
+      "Infinity Pool",
+      "Home Office",
+      "Guest House",
+      "Tropical Garden",
+      "Hurricane-Proof Windows"
+    ],
+    "tokenDetails": {
+      "totalTokens": 210000,
+      "availableTokens": 115500,
+      "tokenPrice": "$10",
+      "tokenSymbol": "WFRT1050",
+      "contractAddress": "0x9abc...def0",
+      "blockchain": "Ethereum"
+    },
+    "financials": {
+      "grossRent": "$18,000/month",
+      "netRent": "$15,300/month",
+      "expenses": {
+        "management": "7%",
+        "maintenance": "5%",
+        "insurance": "3%",
+        "property_tax": "1.8%"
+      },
+      "projectedAppreciation": "6.1% annually"
+    },
+    "yearBuilt": 2021,
+    "parkingSpaces": 4,
+    "lotSize": "1.2 acres",
+    "images": [
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80"
+    ],
+    "model3d": "/models/house1.glb",
+    "agent": {
+      "name": "Carlos Rivera",
+      "phone": "+1 (555) 456-7890",
+      "email": "carlos@realestate.com",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
+    }
+  },
+  {
+    "id": 4,
+    "title": "Mountain View Cabin",
+    "price": {
+      "usd": 450000,
+      "eth": 225
+    },
+    "location": "Aspen, CO",
+    "image": "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80",
+    "type": "house",
+    "roi": "6.5%",
+    "metrics": {
+      "totalInvestors": 312,
+      "funded": "78%",
+      "minInvestment": "$10",
+      "monthlyIncome": "$340",
+      "appreciation": "3.8%",
+      "rentalYield": "5.9%",
+      "totalReturn": "8.2%"
+    },
+    "status": "Active Investment",
+    "description": "A charming mountain cabin nestled in the Rockies with stunning views of the surrounding peaks. Perfect for vacation rental income with strong seasonal demand. Tokenized for accessible fractional ownership.",
+    "features": [
+      "Mountain Views",
+      "Wood Fireplace",
+      "Hot Tub",
+      "Ski Storage",
+      "Open Floor Plan",
+      "Deck & Patio",
+      "Mud Room",
+      "Workshop"
+    ],
+    "tokenDetails": {
+      "totalTokens": 45000,
+      "availableTokens": 9900,
+      "tokenPrice": "$10",
+      "tokenSymbol": "MTN225",
+      "contractAddress": "0xdef0...1234",
+      "blockchain": "Ethereum"
+    },
+    "financials": {
+      "grossRent": "$4,200/month",
+      "netRent": "$3,570/month",
+      "expenses": {
+        "management": "9%",
+        "maintenance": "6%",
+        "insurance": "2.5%",
+        "property_tax": "1.1%"
+      },
+      "projectedAppreciation": "3.8% annually"
+    },
+    "yearBuilt": 2018,
+    "parkingSpaces": 2,
+    "lotSize": "0.3 acres",
+    "images": [
+      "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80",
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80"
+    ],
+    "agent": {
+      "name": "Sarah Mitchell",
+      "phone": "+1 (555) 321-6547",
+      "email": "sarah@realestate.com",
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80"
+    }
+  },
+  {
+    "id": 5,
+    "title": "Downtown Loft",
+    "price": {
+      "usd": 625000,
+      "eth": 312
+    },
+    "location": "Austin, TX",
+    "image": "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=800&q=80",
+    "type": "apartment",
+    "roi": "7.1%",
+    "metrics": {
+      "totalInvestors": 178,
+      "funded": "92%",
+      "minInvestment": "$10",
+      "monthlyIncome": "$480",
+      "appreciation": "5.5%",
+      "rentalYield": "5.8%",
+      "totalReturn": "10.6%"
+    },
+    "status": "Almost Funded",
+    "description": "Converted warehouse loft in the heart of Austin's vibrant downtown. Exposed brick, high ceilings, and walkability to live music venues and tech hubs make this a prime tokenized investment.",
+    "features": [
+      "Exposed Brick",
+      "High Ceilings",
+      "Industrial Chic",
+      "Rooftop Access",
+      "Smart Home",
+      "Gym Access",
+      "Bike Storage",
+      "Concierge"
+    ],
+    "tokenDetails": {
+      "totalTokens": 62500,
+      "availableTokens": 5000,
+      "tokenPrice": "$10",
+      "tokenSymbol": "LOFT312",
+      "contractAddress": "0x2468...ace0",
+      "blockchain": "Ethereum"
+    },
+    "financials": {
+      "grossRent": "$5,800/month",
+      "netRent": "$4,930/month",
+      "expenses": {
+        "management": "8%",
+        "maintenance": "4%",
+        "insurance": "2%",
+        "property_tax": "1.4%"
+      },
+      "projectedAppreciation": "5.5% annually"
+    },
+    "yearBuilt": 2016,
+    "parkingSpaces": 1,
+    "lotSize": "1,850 sqft",
+    "images": [
+      "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=800&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"
+    ],
+    "agent": {
+      "name": "Marcus Chen",
+      "phone": "+1 (555) 789-0123",
+      "email": "marcus@realestate.com",
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80"
+    }
+  },
+  {
+    "id": 6,
+    "title": "Beachfront Condo",
+    "price": {
+      "usd": 725000,
+      "eth": 362
+    },
+    "location": "San Diego, CA",
+    "image": "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
+    "type": "apartment",
+    "roi": "6.9%",
+    "metrics": {
+      "totalInvestors": 245,
+      "funded": "67%",
+      "minInvestment": "$10",
+      "monthlyIncome": "$540",
+      "appreciation": "4.2%",
+      "rentalYield": "6.1%",
+      "totalReturn": "9.4%"
+    },
+    "status": "Active Investment",
+    "description": "Stunning oceanfront condo with panoramic Pacific views. Steps from the sand with resort-style amenities. Ideal for vacation rental or personal retreat—now available for fractional ownership through tokenization.",
+    "features": [
+      "Ocean Views",
+      "Pool & Spa",
+      "Beach Access",
+      "Fitness Center",
+      "Covered Parking",
+      "In-Unit Laundry",
+      "Balcony",
+      "Storage"
+    ],
+    "tokenDetails": {
+      "totalTokens": 72500,
+      "availableTokens": 23925,
+      "tokenPrice": "$10",
+      "tokenSymbol": "BEACH362",
+      "contractAddress": "0x3579...bdf1",
+      "blockchain": "Ethereum"
+    },
+    "financials": {
+      "grossRent": "$6,400/month",
+      "netRent": "$5,440/month",
+      "expenses": {
+        "management": "8%",
+        "maintenance": "5%",
+        "insurance": "2.5%",
+        "property_tax": "1.2%"
+      },
+      "projectedAppreciation": "4.2% annually"
+    },
+    "yearBuilt": 2017,
+    "parkingSpaces": 2,
+    "lotSize": "1,420 sqft",
+    "images": [
+      "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
+    ],
+    "agent": {
+      "name": "Emily Rodriguez",
+      "phone": "+1 (555) 234-5678",
+      "email": "emily@realestate.com",
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80"
+    }
+  }
+]

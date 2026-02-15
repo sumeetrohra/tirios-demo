@@ -3,7 +3,10 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
+const cors = require("cors");
 const userRouter = require("./routes/userRoute");
+const propertyRouter = require("./routes/propertyRoute");
+const blogRouter = require("./routes/blogRoute");
 
 const app = express();
 
@@ -12,10 +15,13 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/user', userRouter);
+app.use('/api/properties', propertyRouter);
+app.use('/api/blog', blogRouter);
 app.use(fileUpload());
 
 // deployment
